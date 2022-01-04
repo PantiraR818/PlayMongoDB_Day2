@@ -1,0 +1,11 @@
+use("shop-phakpoom");
+// ให้ค้นหาสินค้าที่มีคำว่า "water" อยู่ในชื่อ และแสดงเฉพาะฟิลด์ name, vol, price
+
+db.products.find(
+    {"name" : { $regex : /water/ }},
+    {
+        "name" : 1,
+        "vol" : 1,
+        "price" : 1
+    }
+);

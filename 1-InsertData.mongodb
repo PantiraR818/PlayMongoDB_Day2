@@ -1,0 +1,64 @@
+//เปลี่ยนชื่อ database เป็นชื่อ shop_yourname
+use("shop_phakpoom2");
+
+db.products.insertOne(
+    {
+        name: "Woodplate",
+        quantity: 100,
+        price: 500,
+        tags: ["wood", "kitchen","school"]
+    }
+);
+
+db.products.insertMany([
+    { name: "ruler", quantity: 1250, price: 20, tags: ["school", "supplies"] },
+    { name: "eraser", quantity: 900, price: 5, tags: ["rubber","eraser","supplies","office","school"]},
+    { name: "office paper", quantity: 500, size: "A4", prices: 80, tags: "office"}
+]);
+
+//แต่ละ Document จะเหมือนหรือต่างก็ได้ เก็บข้อมูลแบบยืดหยุ่นได้
+db.products.insertMany([
+    {
+        name : "Nike Shoes",
+        brand: "Nike",
+        model: "X001",
+        size: {  
+            uk: 10,
+            us: 11,
+            asia: 44
+        },
+        price : 500,
+        quantity : 20,
+        color: "black"
+    },
+    {
+        name: "Belkin Bags",
+        brand: "Belkin",
+        color: "gray",
+        price: 1000,
+        size: 15,
+        uom: "in",
+        quantity: 100
+    }
+]);
+
+db.products.insertMany([
+    {
+        name : "Apple Watch",
+        brand: "Apple",
+        model: "series 4",
+        price : 450,
+        quantity : 20,
+        category: {
+           color: "red",
+           celler: "4g",
+           type: "sport"
+        }
+    },
+    {
+        name : "Galaxy Note 12",
+        brand: "samsung",
+        price : 600,
+        quantity : 100,
+        color: "blue"  
+    }]);

@@ -1,0 +1,102 @@
+use("soi5_shop");
+//1 ==>น้อยไปมาก
+//0 ==> มากไปน้อย
+//เรียงข้อมูลตามCustomer
+// db.customers.find().sort({ email : 1});
+db.customers.find(
+    {},
+    {name : 1}
+).sort({ email : 1});
+
+db.products.find(
+    {},
+    {name : 1, price : 1}
+).sort(
+    {price : -1}
+).limit(3)
+
+
+// dot notation
+db.sales.find(
+    {"customer.gender": "F"},
+    {
+    "customer.email":"michael90@gmail.com",
+    "customers.email" : 1,
+    totalPrice: 1
+    }
+);
+
+//Aggregate Func
+//Sum Count Min Max Average
+db.sales.aggregate([
+    //จะกรุ๊ปหรือจะแมทซ์เลยก็ได้
+    //filter document ที่ตั้องการก่อน $match : {}
+    {
+    $match: {"customer.gender" : "F" } },
+    //Groupping
+    {
+    $group: {
+        //ตามข้อมูลที่เรา insert
+        //ใส่ค่าที่ต้องการให้แสดง
+      "_id": "$purchaseMethod",
+      "totalSales": {
+        $sum: "$totalPrice"
+      }
+    }},
+    {
+        $sort: {
+          "totalSales": -1
+        }
+    } 
+]
+);
+
+//ให้หายอดขายรวมจาการขายออนไลน์ (purchaseMethod: online) โดยแยกตามอีเมลของ customer และเรียงจากน้อยไปมากตามยอดขาย
+
+db.sales.aggregate(
+    [
+        //filter document ที่ต้องการก่อน $match : {}
+        { $match: { "purchaseMethod": "Online"} },
+        //groupping
+        {
+            $group: {
+                "_id": "$customer.email",
+                "totalSales" : {$sum: "$totalPrice"}
+            }
+        },
+        {
+            $sort:{ "totalSales": 1 }
+        }
+    ]
+);
+
+
+db.sales.aggregate(
+    //กรอง
+    { /**
+     * query: The query in MQL.
+     */
+    $match: {
+       purchaseMethod : { $exists : true}
+    }},
+    {
+        $group: {
+          "_id": {
+              "purchaseMethod" : "$purchaseMethod",
+              "gender" : "$customer.gender"
+          },
+          "total" : { $sum : "$totalPrice"},
+          "noOfOrder" : { $sum : 1}, //ใช้แทน Count
+          //"noOfOrder" : { $sum : "$totalPrice"},
+          "average" : { $avg : "$totalPrice"},
+        }
+    },
+    {
+        //aggregate แบบหลายชั้น
+        $sort: { 
+          "_id": 1,
+          "_id.gender": 1
+        }
+    }
+);
+

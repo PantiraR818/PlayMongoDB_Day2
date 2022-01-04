@@ -1,0 +1,86 @@
+
+db.sales.find();
+//write your own command
+//show totalsales from online channel by customer gender 
+db.sales.aggregate(
+    {
+        $match: {
+            "purchaseMethod": "Online"
+        }
+    },
+    {
+        $group: 
+        { 
+            _id: "$customer.gender", 
+            total: {$sum: "$totalPrice"}
+        }
+    }, 
+);
+
+db.sales.aggregate(
+    {
+        $match : { "customer.gender" : "F" }
+    },
+    { $group :  
+        { 
+            _id : {
+                "location":"$storeLocation",
+                "channel" : "$purchaseMethod"
+            }, 
+            total: { $sum : "$totalPrice" },
+            noOfSales : { $sum : 1 },      // equal to COUNT
+            avgSales : { $avg : "$totalPrice" },
+            maxSales : { $max : "$totalPrice" }
+        } 
+    },
+    {   //HAVING
+        $match: {
+          total : { $lt : 20000 }
+        }
+    },
+    {
+        $sort : { "total" : -1 }
+    },
+    {
+        $limit: 3
+    }
+);
+
+
+db.sales.aggregate(
+    {
+        $lookup: {
+          from: 'customers',
+          localField: 'customer.email',
+          foreignField: 'email',
+          as: 'customer.moreInfo'
+        }
+    },
+    { $match : { "customer.moreInfo.name" : "Andrew Maxwell" } },
+    { $group: { "_id" : 1 , total : { $sum : "$totalPrice" } } }
+);
+
+db.sales.aggregate(
+    {
+        $unwind: {
+          path: "$items"
+        }
+    },
+    { 
+        $group : 
+        { _id : "$items.name", 
+        "qty" : { $sum : "$items.quantity"} 
+        } 
+    },
+    { $sort : { qty : -1 } },
+    { $limit : 3 }
+);
+
+db.sales.aggregate(
+    { $group : { 
+        _id :  { $month : "$saleDate" }, 
+        "total": { $sum : "$totalPrice"}  
+        } 
+    },
+    { $sort :  { _id : 1 } }
+);

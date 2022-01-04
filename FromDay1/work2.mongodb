@@ -1,0 +1,23 @@
+use("shop-phakpoom");
+
+// operator $gt, $gte, $lt, $lte, $ne 
+db.products.find({ 
+    "price" : { $gte: 100 }
+});
+
+//regular expression  --contains
+db.products.find(
+    //filter
+    { "name" : { $regex: /Cho/ }},
+    //projection (select desired fields)  1-include  0-exclude
+    { 
+        "size" : 0
+    }
+);
+
+
+// db.products.find();
+
+//gt: greater than
+//gte    grater than or equal
+//  select * from products where code='1002' and color='red' and price > 100;

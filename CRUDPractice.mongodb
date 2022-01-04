@@ -1,0 +1,45 @@
+use("shop_phakpoom2");
+Update
+db.products.find(); 
+//Product ที่ไม่มีแท็กว่า Home
+db.products.updateMany(
+    {     //not in อีกตัว in
+    tags : {$nin : ["home"]}
+    },
+    {
+        $set : { $push : { tags : "home"}}
+    }
+);
+ให้เพิ่มฟิวส์  isBestSeller กับ products ที่มีชื่อแท็ก home , school
+
+db.products.updateMany(
+    { tags : {$in : ["home" , "school"]}},
+    {
+        /**
+         * field: The field name
+         * expression: The expression.
+         */
+การunset คือการ ลบค่านั้่น ไม่เอาค่านั้น
+        $set: {
+          isBestSeller : true
+        }
+    }
+)
+db.products.find({tags : {$in : ["home" , "school"]}});
+
+
+
+// Delete คำสั่งสำหรับการลบข้อมูล
+db.products.deleteMany({ quantity : { $lt : 1000 }  });
+db.products.find();
+db.products.deleteMany(
+    { size : {$exists : false}}
+);
+db.products.find();
+
+
+
+
+
+
+

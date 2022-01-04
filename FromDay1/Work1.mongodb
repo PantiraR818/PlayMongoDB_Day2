@@ -1,0 +1,194 @@
+use("shop-phakpoom");
+
+db.products.insertOne(
+    {
+        "code": "1002",
+        "name":"Sneakers",
+        "brand": "New Balance",
+         "size" : [44,45,46],
+        "color": ["black","white","yellow","Orange"]
+    }
+);
+
+db.products.insertMany([
+    {"cose": "1002",
+    "name":"Sneakers",
+    "brand": "New Balance",
+     "size" : [44,45,46],
+    "color": ["black","white","yellow","Orange"],
+    "description":"kjfnedfdifiewfewf",
+    "manufacturer":
+    {
+        "name" :"New Balance Co., Ltd",
+        "address" : "123 New Rd., Bkk"
+    }
+    },
+
+    {
+    "cose": "1002",
+    "name":"Computer",
+    "brand": "MSI",
+    "description":{
+        "ram":"16",
+        "cpu":"core i7-11600",
+        "ssd":"1TB 9600 RPM",
+        
+    },
+    "price":67000
+    },
+
+    {
+    "cose": "1003",
+    "name":"notebook",
+    "brand": "MSI",
+    "description":{
+        "ram":"32",
+        "cpu":"core i7-11600",
+        "ssd":"2TB 9600 RPM",
+        
+    },
+    "price":100000  
+    }
+
+
+]);
+
+db.products.insertMany([
+    {"code" : "1002" ,
+    "name" : "Sneaker",
+    "brand" : "Nike" ,
+    "size" : [44,45,46],
+    "color" : ["black" ,"white" ,"yellow"],
+    "description" : "tatattatattatattatatattatatatattaa" ,
+    "manufacturer" : {
+        "name" : "Nike Co., Ltd",
+        "address" : "123 New Rd., Bkk.",
+    }
+},
+{   
+    "code " : "1003",
+    "name" : "Labtop",
+    "brand" : "Lenovo",
+    "description" : {
+        "ram" : "4GB",
+        "cpu" : "core i9-9999",
+    },
+    "price" : 20000 ,
+     "manufacturer" : {
+        "name" : "Andres S.",
+        "address" : "99 La"
+    }
+},
+
+   {"code " : "1004",
+    "name" : "Iphone",
+    "brand" : "Apple",
+    "description" : {
+        "ram" : "4GB",
+        "cpu" : "A14",
+    },
+    "price" : 20000 ,
+     "manufacturer" : {
+        "name" : "Apple",
+        "address" : "A La. 87" ,
+    }
+}
+]);
+
+db.products.insertMany([
+    { 
+        "code" : "1002", 
+        "name" : "Sneakers", 
+        "brand" : "Balenciaga",
+        "size" : [44, 45 , 46],
+        "color" : ["black" , "red", "write" , "green"],
+        "description" :
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "manufacturer" :{
+            "name" : "Balenciaga Co., Ltd",
+            "address" : "123 New Rd., Bkk."
+        }
+    },
+    
+    {
+        "code" : "1003",
+        "name" : "Shirt-street",
+        "brand" : "Supreme",
+        "description" : {
+            "shirt" : "street ware Supreme",
+            "pant" : "chose of Supreme"
+        },
+        "price" : 15000, "manufacturer" :
+        "Supreme Co.,Ltd."
+    }
+]);
+
+db.products.insertMany([
+    {
+        "code" : "1002",
+        "name" : 'Sneakers',
+        "brand" : "New Balance",
+        "size" : [44,45,46],
+        "color" : ["black","white","grey"],
+        "description" : "good",
+        "manufacturer" : {
+        "name" : "New Balance Co., Ltd",
+        "address": "123 New Rd., Bkk."
+        }
+    },
+    {
+        "code" : "1003",
+        "name" : "Laptop 13-in",
+        "brand" : "Lenovo",
+        "description" : {
+            "ram" : "6GB",
+            "cpu" : "core i5-6009",
+            "hdd" : "1TB 5400 RPM"
+        },
+        "price" : 15000,
+        "manufacturer" : "Lenovo Co., Ltd"
+    },
+    {
+        "code" : "1004",
+        "name" : "shirt",
+        "brand" : "off-white",
+        "size" : ["L","XL","XXL"],
+        "description" : "good",
+        "price" : "5000",
+        "manufacturer" : "Off-White Co., Ltd"
+    }
+]);
+// insert a document
+// db.products.insertOne({
+//     "code" : "1001",
+//     "name" : "Chocolate",
+//     "category" : "Candy",
+//     "price" : 100,
+//     "tags" : ["Sweet","Kids","Sugar"],
+// });
+
+// db.products.insertMany([
+//     { 
+//         "code" : "1002",  "name" : "Sneakers", 
+//         "brand" : "New Balance", "size" : [44, 45, 46],
+//         "color" : ["black", "white", "yellow", "orange"],
+//         "description" : "asdjkhfadhgoianerahdfaidsfhawerjadnfvnmrq4j",
+//         "manufacturer" : {
+//             "name" : "New Balance Co., Ltd", "address" : "123 New Rd., Bkk."
+//         }
+//     },
+//     {
+//         "code" : "1003", "name" : "Laptop 13-in",
+//         "brand" : "Lenovo",
+//         "description" : {
+//             "ram" : "4GB",
+//             "cpu" : "core i5-6009",
+//             "hdd" : "1TB 5400 RPM"
+//         },
+//         "price" : 12000, "manufacturer" : "Lenovo Co., Ltd."
+//     },
+//     {
+//         "code" : "1004",  "name" : "drinking water",
+//         "vol" : "250ml", "qty" : 6,  "price" : 30
+//     }
+// ]);
